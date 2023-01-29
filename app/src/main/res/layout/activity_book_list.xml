@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.BookListActivity">
+
+    <EditText
+        android:id="@+id/et_book_isbn"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn"
+        android:hint="图书的ISBN"
+        android:inputType="number"
+        android:padding="12dp"
+        android:textColorHighlight="#3C3F41" />
+
+
+    <ImageView
+        android:id="@+id/iv_book_enter"
+        android:layout_width="64dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:srcCompat="@drawable/enter" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_book_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="76dp" />
+
+
+</LinearLayout>

@@ -1,12 +1,14 @@
-package com.example.reading;
+package com.example.reading.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.WindowManager;
 
-public class Splash extends AppCompatActivity {
+import com.example.reading.R;
+
+
+public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,16 +21,16 @@ public class Splash extends AppCompatActivity {
             @Override
             public void run() {
                 try{
-                    sleep(2000);//使程序休眠2秒
-                    Intent it=new Intent(getApplicationContext(),MainActivity.class);//启动MainActivity
+                    sleep(1000);//使程序休眠2秒
+                    Intent it=new Intent(getApplicationContext(), BookListActivity.class);//启动BookList
                     startActivity(it);
-                    finish();//关闭当前活动
+                    finish();//关闭
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
         };
-        myThread.start();//启动线程
+        myThread.start();//启动
     }
 
 }
