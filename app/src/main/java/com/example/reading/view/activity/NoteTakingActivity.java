@@ -25,6 +25,7 @@ public class NoteTakingActivity extends Activity {
         mEtTakeNote = findViewById(R.id.et_note_take);
         mBtnBack = findViewById(R.id.btn_note_back);
 
+
         
 
     }

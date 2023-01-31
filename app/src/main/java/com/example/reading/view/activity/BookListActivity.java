@@ -40,13 +40,15 @@ public class BookListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();//隐藏标题栏
-
+        String ISBN=mEtIsbn.getText().toString().trim();
         setContentView(R.layout.activity_book_list);
         initView(); //初始化view
+        //因为接口原因，请求后要隔两秒才可以继续请求，且一个apikey一天最多接受来自5个ip的请求，一旦超过，将会禁止当天该apikey的所有请求
+        String mUrl = "https://api.jike.xyz/situ/book/isbn/" + ISBN + "?apikey=14768.f8d5763973746ae6fd0e912190f33195.cd9e64ec1e9c28664054f0f8918274ca";
         mIvEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendGetNetRequest("https://api.jike.xyz/situ/book/isbn/978-7-115-54342-4?apikey=14768.f8d5763973746ae6fd0e912190f33195.cd9e64ec1e9c28664054f0f8918274ca");
+                sendGetNetRequest(mUrl);
             }
         });
 
@@ -84,9 +86,11 @@ public class BookListActivity extends AppCompatActivity {
                             InputStream inputStream = connection.getInputStream();
                             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
                             String json = bufferedReader.readLine();
+                            Log.d("ggg","(:)-->> jjj");
                             Gson gson = new Gson();
                             GetTextItem getTextItem = gson.fromJson(json, GetTextItem.class);
                             updateUI(getTextItem);//更新UI
+                            Log.d("ggg", "(:)-->>niu ");
 
                         }
                     } catch (Exception e) {
