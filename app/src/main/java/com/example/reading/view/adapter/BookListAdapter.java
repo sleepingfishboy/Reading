@@ -1,14 +1,17 @@
 package com.example.reading.view.adapter;
 
 import android.accessibilityservice.AccessibilityService;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.reading.R;
 import com.example.reading.view.GetTextItem;
 
@@ -34,22 +37,16 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.InnerH
     public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
         View itemView = holder.itemView;
         TextView nameTv = itemView.findViewById(R.id.tv_item_book_name);
-        //GetTextItem.DataBean bean=beanList.get(position);
-
+        ImageView bookIv = itemView.findViewById(R.id.iv_item_book);
         nameTv.setText(mData.getName());
+        Glide.with(itemView.getContext()).load(mData.getPhotoUrl()).into(bookIv);
     }
 
-//    public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
-//        View itemView = holder.itemView;
-//        TextView nameTv = itemView.findViewById(R.id.tv_item_book_name);
-//        //GetTextItem.DataBean bean=beanList.get(position);
-//
-//        nameTv.setText(mData.getAuthor());
-//    }
+
 
     @Override
     public int getItemCount() {
-        return 100;
+        return 1;
     }
 
     public void setData(GetTextItem getTextItem) {

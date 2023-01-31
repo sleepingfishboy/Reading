@@ -1,6 +1,5 @@
 package com.example.reading.view.adapter;
 
-]
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -68,7 +67,8 @@ public class NoteAdapter extends BaseAdapter implements Filterable {
         //Set text for TextView
         String allText = noteList.get(position).getContent();
 
-
+        tv_content.setText(allText);
+        tv_time.setText(noteList.get(position).getTime());
 
         //Save note id to long
         v.setTag(noteList.get(position).getId());

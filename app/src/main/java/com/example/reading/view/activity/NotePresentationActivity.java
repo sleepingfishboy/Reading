@@ -9,17 +9,22 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.reading.R;
 import com.example.reading.view.Note;
+import com.example.reading.view.NoteOperating;
 import com.example.reading.view.adapter.NoteAdapter;
 import com.example.reading.view.repository.NoteDatabase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,22 +34,30 @@ import java.util.List;
 public class NotePresentationActivity extends AppCompatActivity {
 
     FloatingActionButton mBtnEstablish;
-    TextView mTvList;
-    ListView mLvList;
+
+    private ListView mLvList;
     private NoteDatabase dbHelper;
 
     private Context context = this;
     private NoteAdapter adapter;
+    private String content;
+    private String time;
+
     private List<Note> noteList = new ArrayList<Note>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();//隐藏标题栏
 
         setContentView(R.layout.activity_notepresentation);
         mBtnEstablish = findViewById(R.id.btn_note_establish);
-        mTvList = findViewById(R.id.tv_note_list);
+
+        adapter = new NoteAdapter(getApplicationContext(),noteList);
+        mLvList = findViewById(R.id.lv_note_list);
+        refreshListView();
+        mLvList.setAdapter(adapter);
 
         mBtnEstablish.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,10 +69,30 @@ public class NotePresentationActivity extends AppCompatActivity {
         });
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //接收startActivityForResult的结果
+    //接收startActivityForResult的结果
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
-        String note = data.getStringExtra("input");
-        mTvList.setText(note);
+        String content = data.getStringExtra("content");
+        String time = data.getStringExtra("time");
+        Note note = new Note(content, time, 1);
+        NoteOperating op = new NoteOperating(context);
+        op.open();
+        op.addNote(note);
+        op.close();
+        refreshListView();
+
+    }
+
+
+
+    public void refreshListView(){
+
+        NoteOperating op = new NoteOperating(context);
+        op.open();
+        if (noteList.size() > 0) noteList.clear();
+        noteList.addAll(op.getAllNotes());
+        op.close();
+        adapter.notifyDataSetChanged();
     }
 }
