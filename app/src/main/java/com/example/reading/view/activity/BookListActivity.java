@@ -79,7 +79,7 @@ public class BookListActivity extends AppCompatActivity {
                             Map<String, List<String>> headerFields = connection.getHeaderFields();
                             Set<Map.Entry<String, List<String>>> entries = headerFields.entrySet();
                             for (Map.Entry<String, List<String>> entry : entries) {
-                                Log.d("ggg", "(:)-->> niu");
+                                Log.d("ggg", "(:)-->> ");
                             }
                             InputStream inputStream = connection.getInputStream();
                             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
