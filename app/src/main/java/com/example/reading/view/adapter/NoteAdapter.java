@@ -59,18 +59,18 @@ public class NoteAdapter extends BaseAdapter implements Filterable {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        //mContext.setTheme(R.style.DayTheme);
+
         View v = View.inflate(mContext, R.layout.note_layout, null);
         TextView tv_content = v.findViewById(R.id.tv_content);
         TextView tv_time = v.findViewById(R.id.tv_time);
 
-        //Set text for TextView
+
         String allText = noteList.get(position).getContent();
 
         tv_content.setText(allText);
         tv_time.setText(noteList.get(position).getTime());
 
-        //Save note id to long
+
         v.setTag(noteList.get(position).getId());
 
         return v;

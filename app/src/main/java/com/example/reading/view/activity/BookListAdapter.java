@@ -1,6 +1,5 @@
-package com.example.reading.view.adapter;
+package com.example.reading.view.activity;
 
-import android.accessibilityservice.AccessibilityService;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,19 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.reading.R;
 import com.example.reading.view.GetTextItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 作者：sleepingfishboy
  * 时间：2023/1/29
  */
 public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.InnerHolder> {
-    GetTextItem.DataBean mData = new GetTextItem.DataBean();
+
+
+
+
 
 
     @NonNull
@@ -38,8 +38,8 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.InnerH
         View itemView = holder.itemView;
         TextView nameTv = itemView.findViewById(R.id.tv_item_book_name);
         ImageView bookIv = itemView.findViewById(R.id.iv_item_book);
-        nameTv.setText(mData.getName());
-        Glide.with(itemView.getContext()).load(mData.getPhotoUrl()).into(bookIv);
+//        nameTv.setText(getTextItem.getData().getName());
+//        Glide.with(itemView.getContext()).load(getTextItem.getData().getPhotoUrl()).into(bookIv);
     }
 
 
@@ -50,11 +50,13 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.InnerH
     }
 
     public void setData(GetTextItem getTextItem) {
-
-
-        mData.getAuthor();
-        mData.getPhotoUrl();
-        mData.getName();
+        getTextItem.getData();
+        getTextItem.getData().getAuthor();
+        Log.d("ggg","(:)-->> aaaaaaaaaaaaaaaaaaaaaaaaaa");
+        Log.d("ggg","(:)-->> "+getTextItem.getData().getAuthor());
+        getTextItem.getData().getPhotoUrl();
+        getTextItem.getData().getName();
+        notifyDataSetChanged();
 
     }
 
@@ -64,5 +66,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.InnerH
             super(itemView);
         }
     }
+
 }
  

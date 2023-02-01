@@ -1,34 +1,32 @@
 package com.example.reading.view.activity;
 
-import static java.lang.System.in;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.reading.R;
 import com.example.reading.view.GetTextItem;
-import com.example.reading.view.adapter.BookListAdapter;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
+
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -36,7 +34,9 @@ public class BookListActivity extends AppCompatActivity {
     private EditText mEtIsbn;
     private ImageView mIvEnter;
     private BookListAdapter mAdapter;
-    String ISBN;
+
+    private Handler mHandler;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +45,16 @@ public class BookListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_list);
 
         initView(); //初始化view
+        //mHandler = new MyHandler();//准备接线员
+
         //因为接口要求，请求后要隔两秒才可以继续请求，且一个apikey一天最多接受来自5个ip的请求，一旦超过，将会禁止当天该apikey的所有请求
 
         mIvEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //sendGetNetRequest();
-
-                Intent intent = new Intent(BookListActivity.this, NotePresentationActivity.class);
-                startActivity(intent);
-
+                sendGetNetRequest();
+//                Intent intent = new Intent(BookListActivity.this, NotePresentationActivity.class);
+//                startActivity(intent);
             }
         });
 
@@ -89,6 +89,7 @@ public class BookListActivity extends AppCompatActivity {
                         connection.setRequestProperty("Accept-Language", "zh-CN,zh;q=0.9");
                         connection.setRequestProperty("Accept-Encoding", "gzip,deflate");
                         connection.connect();
+
                         int responseCode = connection.getResponseCode();
                         if (responseCode == 200) {
                             Map<String, List<String>> headerFields = connection.getHeaderFields();
@@ -102,15 +103,26 @@ public class BookListActivity extends AppCompatActivity {
                             Log.d("ggg", "(:)-->> jjj" + json);
                             Gson gson = new Gson();
                             GetTextItem getTextItem = gson.fromJson(json, GetTextItem.class);
+                            getTextItem.getData().getName();
+                            Log.d("ggg", "(:)-->> 名字" + getTextItem.getData().getName());
+                            SharedPreferences sp=getSharedPreferences("json",Context.MODE_PRIVATE);
+                            SharedPreferences.Editor eit=sp.edit();
+                            eit.putString(json,json);
+                            eit.apply();
                             updateUI(getTextItem);//更新UI
+                            if (json != null) {
+                                Intent intent = new Intent(BookListActivity.this, BookIntroduction.class);
+                                intent.putExtra("json", json);
+                                startActivity(intent);
 
-
+                            } else Toast.makeText(this, "!获取数据失败", Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
         ).start();
+
     }
 
     private void updateUI(GetTextItem getTextItem) {
@@ -121,4 +133,6 @@ public class BookListActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

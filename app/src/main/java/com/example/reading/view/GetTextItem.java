@@ -1,10 +1,12 @@
 package com.example.reading.view;
 
+import android.util.Log;
+
 /**
  * 作者：sleepingfishboy
  * 时间：2023/1/29
  */
-public class GetTextItem {
+public class GetTextItem  {
 
 
     /**
@@ -42,6 +44,7 @@ public class GetTextItem {
     }
 
     public static class DataBean {
+
         /**
          * id : 9787020024759
          * name : 围城
