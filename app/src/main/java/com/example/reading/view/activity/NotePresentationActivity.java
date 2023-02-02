@@ -62,67 +62,97 @@ public class NotePresentationActivity extends AppCompatActivity implements Adapt
         mBtnEstablish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //跳转到笔记的界面
+//                //跳转到笔记的界面
+//                Intent intent = new Intent(NotePresentationActivity.this, NoteTakingActivity.class);
+//                intent.putExtra("mode", 4);
+//                startActivityForResult(intent, 0);//跳转到笔记的界面
                 Intent intent = new Intent(NotePresentationActivity.this, NoteTakingActivity.class);
-                intent.putExtra("mode", 4);
-                startActivityForResult(intent, 0);//跳转到笔记的界面
+                startActivityForResult(intent, 0);
             }
         });
     }
 
-    //接收startActivityForResult的结果
+
+    //接收startActivtyForResult的结果
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-
-        int returnMode;
-        long note_Id;
-        returnMode = data.getExtras().getInt("mode", -1);
-        note_Id = data.getExtras().getLong("id", 0);
-
-        if (returnMode == 1) {
-            //更新当前笔记
-
-            String content = data.getExtras().getString("content");
-            String time = data.getExtras().getString("time");
-            int tag = data.getExtras().getInt("tag", 1);
-
-            Note newNote = new Note(content, time, tag);
-            newNote.setId(note_Id);
-            NoteOperating op = new NoteOperating(context);
-            op.open();
-            op.updateNote(newNote);
-            op.close();
-        } else if (returnMode == 0) {
-            //新建笔记
-
-            String time = data.getStringExtra("time");
-
-            int tag = data.getExtras().getInt("tag", 1);
-            Note newNote = new Note(content, time, tag);
-            NoteOperating op = new NoteOperating(context);
-            op.open();
-            op.addNote(newNote);
-            op.close();
-
-        }else{
-
-    }
-        refreshListView();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
+        String content = data.getStringExtra("content");
+        String time = data.getStringExtra("time");
+        Note note = new Note(content, time, 1);
+        NoteOperating op = new NoteOperating(context);
+        op.open();
+        op.addNote(note);
+        op.close();
+        refreshListView();
 
     }
 
-
-    public void refreshListView() {
+    public void refreshListView(){
 
         NoteOperating op = new NoteOperating(context);
         op.open();
+        // set adapter
         if (noteList.size() > 0) noteList.clear();
         noteList.addAll(op.getAllNotes());
         op.close();
         adapter.notifyDataSetChanged();
     }
+
+
+//    //接收startActivityForResult的结果
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//
+//
+//        int returnMode;
+//        long note_Id;
+//        returnMode = data.getExtras().getInt("mode", -1);
+//        note_Id = data.getExtras().getLong("id", 0);
+//
+//        if (returnMode == 1) {
+//            //更新当前笔记
+//
+//            String content = data.getExtras().getString("content");
+//            String time = data.getExtras().getString("time");
+//            int tag = data.getExtras().getInt("tag", 1);
+//
+//            Note newNote = new Note(content, time, tag);
+//            newNote.setId(note_Id);
+//            NoteOperating op = new NoteOperating(context);
+//            op.open();
+//            op.updateNote(newNote);
+//            op.close();
+//        } else if (returnMode == 0) {
+//            //新建笔记
+//
+//            String time = data.getStringExtra("time");
+//
+//            int tag = data.getExtras().getInt("tag", 1);
+//            Note newNote = new Note(content, time, tag);
+//            NoteOperating op = new NoteOperating(context);
+//            op.open();
+//            op.addNote(newNote);
+//            op.close();
+//
+//        }else{
+//
+//    }
+//        refreshListView();
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//    }
+
+
+//    public void refreshListView() {
+//
+//        NoteOperating op = new NoteOperating(context);
+//        op.open();
+//        if (noteList.size() > 0) noteList.clear();
+//        noteList.addAll(op.getAllNotes());
+//        op.close();
+//        adapter.notifyDataSetChanged();
+//    }
 
 
     @Override
@@ -142,3 +172,4 @@ public class NotePresentationActivity extends AppCompatActivity implements Adapt
         }
     }
 }
+

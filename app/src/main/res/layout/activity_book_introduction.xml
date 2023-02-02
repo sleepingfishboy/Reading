@@ -12,11 +12,13 @@
         android:id="@+id/tv_book_introduction_name"
         android:layout_width="119dp"
         android:layout_height="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="80dp"
         android:text="围城"
+        android:textSize="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.436"
         app:layout_constraintStart_toEndOf="@+id/iv_book"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,45 +26,43 @@
         android:id="@+id/tv_book_introduction_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="136dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="20dp"
         android:text="钱锺书"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.615"
+        android:textSize="24dp"
         app:layout_constraintStart_toEndOf="@+id/iv_book"
         app:layout_constraintTop_toBottomOf="@+id/tv_book_introduction_name" />
 
     <TextView
         android:id="@+id/tv_book_introduction"
-        android:layout_width="344dp"
-        android:layout_height="460dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="323dp"
+        android:layout_height="463dp"
+        android:layout_marginBottom="56dp"
         android:text="《围城》是钱钟书所著的长篇小说。第一版于1947年由上海晨光出版公司出版。1949年之后，由于政治等方面的原因，本书长期无法在中国大陆和台湾重印，仅在香港出现过盗印本。1980年由作者重新修订之后，在中国大陆地区由人民文学出版社刊印。此后作者又曾小幅修改过几次。《围城》 自从出版以来，就受到许多人的推崇。由于1949年后长期无法重印，这本书逐渐淡出人们的视野。1960年代，旅美汉学家夏志清在《中国现代小说史》(A History of Modern Chinese Fiction)中对本书作出很高的评价，这才重新引起人们对它的关注。人们对它的评价一般集中在两方面，幽默的语言和对生活深刻的观察。从1990年代开始，也有人提出对本书的不同看法，认为这是一部被“拔高”的小说，并不是一部出色的作品。很多人认为这是一部幽默作品。除了各具特色的人物语言之外，作者夹叙其间的文字也显着机智与幽默。这是本书的一大特色。也有人认为这是作者卖弄文字，语言显得尖酸刻薄。但这一说法并不为大多数人接受。"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/iv_book"
         android:layout_width="175dp"
         android:layout_height="198dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_book_introduction"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.655"
         app:srcCompat="@drawable/book_demo" />
 
     <Button
         android:id="@+id/btn_book_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="88dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
         android:text="添加笔记"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.272"
         app:layout_constraintStart_toEndOf="@+id/iv_book"
         app:layout_constraintTop_toBottomOf="@+id/tv_book_introduction_author" />
 

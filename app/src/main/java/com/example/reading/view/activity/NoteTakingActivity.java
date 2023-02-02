@@ -37,27 +37,28 @@ public class NoteTakingActivity extends Activity {
         setContentView(R.layout.activity_note_taking);
 
         mEtTakeNote = findViewById(R.id.et_note_take);
-        Intent getIntent = getIntent();
-        int openMode = getIntent.getIntExtra("mode", 0);
-
-        if (openMode == 3) {//打开已存在的note
-            id = getIntent.getLongExtra("id", 0);
-            old_content = getIntent.getStringExtra("content");
-            old_time = getIntent.getStringExtra("time");
-            old_Tag = getIntent.getIntExtra("tag", 1);
-            mEtTakeNote.setText(old_content);
-            mEtTakeNote.setSelection(old_content.length());
-
-        }
+//        Intent getIntent = getIntent();
+//        int openMode = getIntent.getIntExtra("mode", 0);
+//
+//        if (openMode == 3) {//打开已存在的note
+//            id = getIntent.getLongExtra("id", 0);
+//            old_content = getIntent.getStringExtra("content");
+//            old_time = getIntent.getStringExtra("time");
+//            old_Tag = getIntent.getIntExtra("tag", 1);
+//            mEtTakeNote.setText(old_content);
+//            mEtTakeNote.setSelection(old_content.length());
+//
+//        }
 
     }
-
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_HOME){
             return true;
         }
         else if (keyCode == KeyEvent.KEYCODE_BACK){
-            autoSetMessage();
+            Intent intent = new Intent();
+            intent.putExtra("content", mEtTakeNote.getText().toString());
+            intent.putExtra("time", dateToStr());
             setResult(RESULT_OK, intent);
             finish();
             return true;
@@ -65,9 +66,18 @@ public class NoteTakingActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
-
-
-
+//    public boolean onKeyDown(int keyCode, KeyEvent event){
+//        if (keyCode == KeyEvent.KEYCODE_HOME){
+//            return true;
+//        }
+//        else if (keyCode == KeyEvent.KEYCODE_BACK){
+//            autoSetMessage();
+//            setResult(RESULT_OK, intent);
+//            finish();
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 
     public void autoSetMessage(){
         if(openMode == 4){
