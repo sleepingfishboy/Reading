@@ -65,7 +65,6 @@ public class NotePresentationActivity extends AppCompatActivity implements Adapt
                 //跳转到笔记的界面
                 Intent intent = new Intent(NotePresentationActivity.this, NoteTakingActivity.class);
                 intent.putExtra("mode", 4);
-
                 startActivityForResult(intent, 0);//跳转到笔记的界面
             }
         });
@@ -139,7 +138,6 @@ public class NotePresentationActivity extends AppCompatActivity implements Adapt
                 intent.putExtra("mode", 3);
                 intent.putExtra("tag", curNote.getTag());
                 startActivityForResult(intent, 1);
-
                 break;
         }
     }

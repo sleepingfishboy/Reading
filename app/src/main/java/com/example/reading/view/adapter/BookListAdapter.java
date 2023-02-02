@@ -1,6 +1,6 @@
-package com.example.reading.view.activity;
+package com.example.reading.view.adapter;
 
-import android.util.Log;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.reading.R;
 import com.example.reading.view.GetTextItem;
+import com.example.reading.view.Note;
+import com.example.reading.view.fruit;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * 作者：sleepingfishboy
@@ -38,8 +44,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.InnerH
         View itemView = holder.itemView;
         TextView nameTv = itemView.findViewById(R.id.tv_item_book_name);
         ImageView bookIv = itemView.findViewById(R.id.iv_item_book);
-//        nameTv.setText(getTextItem.getData().getName());
-//        Glide.with(itemView.getContext()).load(getTextItem.getData().getPhotoUrl()).into(bookIv);
+
+        nameTv.setText("围城");
+        Glide.with(itemView.getContext()).load("https://img2.doubanio.com/view/subject/m/public/s1070222.jpg").into(bookIv);
     }
 
 
@@ -51,14 +58,15 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.InnerH
 
     public void setData(GetTextItem getTextItem) {
         getTextItem.getData();
-        getTextItem.getData().getAuthor();
-        Log.d("ggg","(:)-->> aaaaaaaaaaaaaaaaaaaaaaaaaa");
-        Log.d("ggg","(:)-->> "+getTextItem.getData().getAuthor());
-        getTextItem.getData().getPhotoUrl();
-        getTextItem.getData().getName();
+//        array.add(getTextItem.getData().getAuthor());
+//        array.add(getTextItem.getData().getPhotoUrl());
+//        array.add(getTextItem.getData().getName());
+
         notifyDataSetChanged();
 
     }
+
+
 
     public class InnerHolder extends RecyclerView.ViewHolder {
 

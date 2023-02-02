@@ -21,7 +21,7 @@ public class BookIntroduction extends AppCompatActivity {
     private TextView mTvAuthor;
     private TextView mTvIntroduction;
     private ImageView mIvBook;
-    GetTextItem.DataBean mData = new GetTextItem.DataBean();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,6 @@ public class BookIntroduction extends AppCompatActivity {
 
     }
     private void initView() {
-        Log.d("ggg","(:)-->> BookIntroduction");
         mBtnAdd = findViewById(R.id.btn_book_add);
         mTvName = findViewById(R.id.tv_book_introduction_name);
         mTvAuthor = findViewById(R.id.tv_book_introduction_author);
@@ -57,6 +56,7 @@ public class BookIntroduction extends AppCompatActivity {
         mTvAuthor.setText(getTextItem.getData().getAuthor());
         mTvIntroduction.setText(getTextItem.getData().getDescription());
         Glide.with(this).load(getTextItem.getData().getPhotoUrl()).into(mIvBook);
+
 
     }
 }

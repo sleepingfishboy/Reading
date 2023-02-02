@@ -35,6 +35,7 @@ public class NoteTakingActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note_taking);
+
         mEtTakeNote = findViewById(R.id.et_note_take);
         Intent getIntent = getIntent();
         int openMode = getIntent.getIntExtra("mode", 0);
@@ -51,12 +52,12 @@ public class NoteTakingActivity extends Activity {
 
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_HOME) {
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        if (keyCode == KeyEvent.KEYCODE_HOME){
             return true;
-        } else if (keyCode == KeyEvent.KEYCODE_BACK) {
+        }
+        else if (keyCode == KeyEvent.KEYCODE_BACK){
             autoSetMessage();
-
             setResult(RESULT_OK, intent);
             finish();
             return true;
@@ -64,27 +65,27 @@ public class NoteTakingActivity extends Activity {
         return super.onKeyDown(keyCode, event);
     }
 
-    public void autoSetMessage() {
 
-        if (openMode == 4) {
-            if (mEtTakeNote.getText().toString().length() == 0) {
-                intent.putExtra("mode", -1); //没有变化
-                Log.d("ggg", "(:)-->> 没有变化");
-            } else {
-                intent.putExtra("mode", 0); //新建笔记
 
+
+
+    public void autoSetMessage(){
+        if(openMode == 4){
+            if(mEtTakeNote.getText().toString().length() == 0){
+                intent.putExtra("mode", -1); //nothing new happens.
+            }
+            else{
+                intent.putExtra("mode", 0); // new one note;
                 intent.putExtra("content", mEtTakeNote.getText().toString());
                 intent.putExtra("time", dateToStr());
                 intent.putExtra("tag", tag);
-                Log.d("ggg", "(:)-->> 新建笔记");
             }
-        } else {
+        }
+        else {
             if (mEtTakeNote.getText().toString().equals(old_content))
-                intent.putExtra("mode", -1); //内容没有改变
-
+                intent.putExtra("mode", -1); // edit nothing
             else {
-                intent.putExtra("mode", 1); //内容发生改变
-
+                intent.putExtra("mode", 1); //edit the content
                 intent.putExtra("content", mEtTakeNote.getText().toString());
                 intent.putExtra("time", dateToStr());
                 intent.putExtra("id", id);
@@ -92,6 +93,7 @@ public class NoteTakingActivity extends Activity {
             }
         }
     }
+
 
 
     public String dateToStr() {

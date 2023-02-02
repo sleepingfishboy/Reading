@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8E0D5"
+    android:background="@drawable/book_list"
     android:orientation="vertical"
 
     tools:context=".view.activity.BookListActivity">
@@ -13,6 +13,7 @@
         android:id="@+id/et_book_isbn"
         android:layout_width="280dp"
         android:layout_height="50dp"
+
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/btn"

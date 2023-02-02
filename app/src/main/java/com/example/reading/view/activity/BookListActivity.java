@@ -11,18 +11,23 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.reading.R;
 import com.example.reading.view.GetTextItem;
+import com.example.reading.view.Note;
+import com.example.reading.view.adapter.BookListAdapter;
+import com.example.reading.view.fruit;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,12 +35,17 @@ import java.util.Set;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class BookListActivity extends AppCompatActivity {
+public class BookListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private EditText mEtIsbn;
     private ImageView mIvEnter;
     private BookListAdapter mAdapter;
+    private String json;
 
     private Handler mHandler;
+    private List<GetTextItem.DataBean> mData = new ArrayList<>();
+
+
+
 
 
     @Override
@@ -53,22 +63,25 @@ public class BookListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendGetNetRequest();
-//                Intent intent = new Intent(BookListActivity.this, NotePresentationActivity.class);
-//                startActivity(intent);
             }
         });
+
 
     }
 
     private void initView() {
         mIvEnter = findViewById(R.id.iv_book_enter);
         mEtIsbn = findViewById(R.id.et_book_isbn);
+
         RecyclerView recyclerView = findViewById(R.id.rv_book_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new BookListAdapter();
         recyclerView.setAdapter(mAdapter);
 
+
     }
+
+
 
 
     public void sendGetNetRequest() {
@@ -99,22 +112,18 @@ public class BookListActivity extends AppCompatActivity {
                             }
                             InputStream inputStream = connection.getInputStream();
                             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                            String json = bufferedReader.readLine();
+                            json = bufferedReader.readLine();
                             Log.d("ggg", "(:)-->> jjj" + json);
                             Gson gson = new Gson();
                             GetTextItem getTextItem = gson.fromJson(json, GetTextItem.class);
                             getTextItem.getData().getName();
                             Log.d("ggg", "(:)-->> 名字" + getTextItem.getData().getName());
-                            SharedPreferences sp=getSharedPreferences("json",Context.MODE_PRIVATE);
-                            SharedPreferences.Editor eit=sp.edit();
-                            eit.putString(json,json);
-                            eit.apply();
+
                             updateUI(getTextItem);//更新UI
                             if (json != null) {
                                 Intent intent = new Intent(BookListActivity.this, BookIntroduction.class);
                                 intent.putExtra("json", json);
                                 startActivity(intent);
-
                             } else Toast.makeText(this, "!获取数据失败", Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception e) {
@@ -135,4 +144,17 @@ public class BookListActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        //设置点击事件
+        switch (adapterView.getId()) {
+            case R.id.rv_book_list:
+
+                Intent intent = new Intent(BookListActivity.this, BookIntroduction.class);
+                intent.putExtra("json", json);
+                startActivity(intent);
+
+                break;
+        }
+    }
 }
