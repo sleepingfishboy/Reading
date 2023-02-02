@@ -10,7 +10,7 @@
 
 # App的展示
 
-![image](https://github.com/sleepingfishboy/Reading/blob/master/app/src/main/res/drawable/demo.gif)
+![imag](https://github.com/sleepingfishboy/Reading/blob/master/app/src/main/res/drawable/demo.gif)
 
 
 
