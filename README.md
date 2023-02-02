@@ -10,7 +10,7 @@
 
 # App的展示
 
-![image][20230202_10_31_34_101](D:\QQ\MobileFile\20230202_10_31_34_101.gif)
+![image](https://github.com/sleepingfishboy/Reading/blob/master/app/src/main/res/20230202_10_31_34_101.gif)
 
 
 
