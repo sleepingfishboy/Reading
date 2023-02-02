@@ -58,9 +58,6 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.InnerH
 
     public void setData(GetTextItem getTextItem) {
         getTextItem.getData();
-//        array.add(getTextItem.getData().getAuthor());
-//        array.add(getTextItem.getData().getPhotoUrl());
-//        array.add(getTextItem.getData().getName());
 
         notifyDataSetChanged();
 
