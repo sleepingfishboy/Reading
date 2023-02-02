@@ -2,7 +2,7 @@
 
 ## App的功能
 
-1.该App的主要功能是通过输入书本的ISBN（https://pdc.capub.cn/index.html），来获取书本的一些信息，还可以为书本添加笔记
+1.该App的主要功能是通过输入书本的ISBN（https://pdc.capub.cn/index.html）来获取书本的一些信息，还可以为书本添加笔记
 
 ## 主要功能的实现
 
